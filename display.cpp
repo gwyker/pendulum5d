@@ -1,5 +1,6 @@
 #include "prototypes.h"
 
+/*
 void display(void)
 {
     if (animate) {
@@ -23,4 +24,32 @@ void display(void)
       glPopMatrix();
     }
       glutPostRedisplay();
+}
+*/
+
+void display(void)
+{
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+  moveCamera();
+
+  glColor3f(0.5f, 0.5f, 1.0f);
+    glBegin(GL_QUADS);
+    glVertex3f(-100.0f, 0.0f, -100.0f);
+    glVertex3f(-100.0f, 0.0f,  100.0f);
+    glVertex3f( 100.0f, 0.0f,  100.0f);
+    glVertex3f( 100.0f, 0.0f, -100.0f);
+  glEnd();
+  glColor3f(1.0f, 0.5f, 0.5f);
+  glutSolidCube(2.0);
+  glutSwapBuffers();
+}
+
+void moveCamera(void) {
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  cout << angle << endl << "  " << vectorX << endl;;
+    gluLookAt(posX, 1.0, posZ,  /* eye is at (0,0,5) */
+    posX + vectorX, 1.0, posZ + vectorZ,      /* center is at (0,0,0) */
+    0.0, 1.0, 0.0);      /* up is in positive Y direction */
 }
