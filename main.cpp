@@ -20,8 +20,8 @@ double vectorX = 0.0;
 double vectorY = 0.0;
 double vectorZ = -1.0;
 double posX = 0.0;
-double posY = 1.0;
-double posZ = 5.0;
+double posY = 0.0;
+double posZ = 18.0;
 double moveSpeed = 0.0;
 
 int mousePrevX = 400;
@@ -45,6 +45,8 @@ void myinit( void )
   gluLookAt(0.0, 0.0, 15.0,  /* eye is at (0,0,5) */
     0.0, 0.0, 0.0,      /* center is at (0,0,0) */
     0.0, 1.0, 0.);      /* up is in positive Y direction */
+
+  // loadTextures();
 
 /* set up initial values */
 

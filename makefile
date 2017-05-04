@@ -2,9 +2,9 @@
 CC = g++
 CFLAGS = -g 
 COPTFLAGS = 
-LIBFLAGS = -lglut -lGLU -lGL -lm
-HEADERS = prototypes.h
-OBJECTS = display.o motion.o
+LIBFLAGS = -lglut -lGLU -lGL -lm -lGLEW libSOIL.a
+HEADERS = prototypes.h SOIL.h
+OBJECTS = display.o motion.o loadtextures.o
 
 all : pristine pendulum clean
 
@@ -19,6 +19,9 @@ display.o : display.cpp $(HEADERS)
 
 motion.o : motion.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -c motion.cpp
+
+loadtextures.o : loadtextures.cpp $(HEADERS)
+	$(CC) $(CFLAGS) -c loadtextures.cpp
 
 clean :
 	rm *.o

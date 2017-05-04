@@ -29,9 +29,7 @@ void display(void)
 
 void display(void)
 {
-  //glEnable(GL_TEXTURE_2D);
-  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-
+  displayTextures();
 
   moveCamera();
   step(t, theta, omega);
@@ -85,4 +83,34 @@ void moveCamera(void) {
 }
 
 void mouseCamera(void) {
+}
+
+void displayTextures(void) {
+    // Enable Texturing and the Depth Buffer
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+
+    // Bind the texture you want to use and draw the first polygon
+
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
+    glPushMatrix();
+    glRotatef(90.0,0.0,1.0,0.0);
+    glTranslatef(0.0,-10.0,0.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
+
+    glEnd();
+    
+    // Flush the buffer
+    glFlush();
+
+    // For completeness turn off these options
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
 }

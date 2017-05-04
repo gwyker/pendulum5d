@@ -1,6 +1,7 @@
 #ifndef PROTOTYPES
 #define PROTOTYPES
 
+#include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -9,6 +10,9 @@
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
+#include "SOIL.h"
+
+extern GLuint textureID[2];
 
 extern double R, g, b, m, A, k;
 extern double theta, omega, t;
@@ -33,5 +37,7 @@ void initialize (void);
 void step(double &t, double &theta, double &omega );
 void moveCamera(void);
 void mouseCamera(void);
+void displayTextures(void);
+void loadTextures(void);
 
 #endif
