@@ -31,7 +31,7 @@ void display(void)
 {
   displayTexturesTest();
 
-  moveCamera();
+  //moveCamera();
   step(t, theta, omega);
 
   displayPendulum();
