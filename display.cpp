@@ -29,11 +29,125 @@ void display(void)
 
 void display(void)
 {
-  displayTextures();
+  displayTexturesTest();
 
   moveCamera();
   step(t, theta, omega);
 
+  displayPendulum();
+  glutSolidSphere(1.0f,8,8);
+  cout << "please show a sphere\n";
+
+  glutSwapBuffers();
+}
+
+void moveCamera(void) {
+  //move camera position based on movespeed
+  posX += moveSpeed * vectorX * 0.3f;
+  posY += moveSpeed * vectorY * 0.3f;
+  posZ += moveSpeed * vectorZ * 0.3f;
+  // cout << "moveSpeed = " << moveSpeed << endl;
+
+  //mouse movement
+
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  // cout << "angleX = " << angleX << endl << "angleZ = " << angleZ << endl;
+    gluLookAt(posX, posY, posZ,  /* eye is at (0,0,5) */
+    posX + vectorX, posY + vectorY, posZ + vectorZ,      /* center is at (0,0,0) */
+    0.0, 1.0, 0.0);      /* up is in positive Y direction */
+}
+
+void displayTextures(void) {
+    // Enable Texturing and the Depth Buffer
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+
+    // Bind the texture you want to use and draw the first polygon
+
+    cout << "displaying texture" << endl;
+
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
+    glPushMatrix();
+    glLoadIdentity();
+    glRotatef(90.0,0.0,1.0,0.0);
+    // glTranslatef(0.0,-10.0,0.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
+
+    glEnd();
+    glPopMatrix();
+    
+    // Flush the buffer
+    glFlush();
+
+    // For completeness turn off these options
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
+}
+
+void displayTexturesTest(void) {
+      // Enable Texturing and the Depth Buffer
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    //glColor3ub(0,255,255);
+
+    glutSolidSphere(1.0f,8,8);
+
+
+    // Bind the texture you want to use and draw the first polygon
+
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
+    glPushMatrix();
+    glLoadIdentity();
+    glRotatef(90.0,0.0,1.0,0.0);
+    glTranslatef(0.0,-10.0,0.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
+
+    glEnd();
+    glPopMatrix();
+
+    // Bind the second you want to use and draw the first polygon
+
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glPushMatrix();
+    //glLoadIdentity();
+    glRotatef(90.0,1.0,0.0,0.0);
+    glTranslatef(0.0,-10.0,-10.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
+
+    glEnd();
+
+    glPopMatrix();
+ 
+    // Flush the buffer
+    glFlush();
+
+    // For completeness turn off these options
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
+}
+
+void displayPendulum(void) {
   glPushMatrix();
   // // Draw ground
 
@@ -61,56 +175,4 @@ void display(void)
   // glColor3f(1.0f, 0.5f, 0.5f);
   // glutSolidCube(2.0);
   glPopMatrix();
-  glutSwapBuffers();
-}
-
-void moveCamera(void) {
-  //move camera position based on movespeed
-  posX += moveSpeed * vectorX * 0.1f;
-  posY += moveSpeed * vectorY * 0.1f;
-  posZ += moveSpeed * vectorZ * 0.1f;
-  // cout << "moveSpeed = " << moveSpeed << endl;
-
-  //mouse movement
-
-
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  // cout << "angleX = " << angleX << endl << "angleZ = " << angleZ << endl;
-    gluLookAt(posX, posY, posZ,  /* eye is at (0,0,5) */
-    posX + vectorX, posY + vectorY, posZ + vectorZ,      /* center is at (0,0,0) */
-    0.0, 1.0, 0.0);      /* up is in positive Y direction */
-}
-
-void mouseCamera(void) {
-}
-
-void displayTextures(void) {
-    // Enable Texturing and the Depth Buffer
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_DEPTH_TEST);
-    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-
-    // Bind the texture you want to use and draw the first polygon
-
-    glBindTexture(GL_TEXTURE_2D, textureID[0]);
-    glPushMatrix();
-    glRotatef(90.0,0.0,1.0,0.0);
-    glTranslatef(0.0,-10.0,0.0);
-    glBegin(GL_POLYGON);
-
-      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
-      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
-      glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
-      glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
-
-    glEnd();
-    
-    // Flush the buffer
-    glFlush();
-
-    // For completeness turn off these options
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_TEXTURE_2D);
 }

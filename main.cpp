@@ -21,7 +21,7 @@ double vectorY = 0.0;
 double vectorZ = -1.0;
 double posX = 0.0;
 double posY = 0.0;
-double posZ = 18.0;
+double posZ = 20.0;
 double moveSpeed = 0.0;
 
 int mousePrevX = 400;
@@ -38,15 +38,19 @@ void myinit( void )
     glClear (GL_COLOR_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
-  gluPerspective( /* field of view in degree */ 45.0,
+  gluPerspective(    45.0,
     /* aspect ratio */ 1.0,
     /* Z near */ 0.1, /* Z far */ 100.0);
   glMatrixMode(GL_MODELVIEW);
-  gluLookAt(0.0, 0.0, 15.0,  /* eye is at (0,0,5) */
-    0.0, 0.0, 0.0,      /* center is at (0,0,0) */
-    0.0, 1.0, 0.);      /* up is in positive Y direction */
+  // gluLookAt(0.0, 0.0, 15.0,  /* eye is at (0,0,5) */
+  //   0.0, 0.0, 0.0,       center is at (0,0,0) 
+  //   0.0, 1.0, 0.);      /* up is in positive Y direction */
 
-  // loadTextures();
+      gluLookAt(  20.0,   20.0,   20.0,  // Eye
+                0.0,   0.0, 0.0,  // Center
+                0.0,   0.0, 1.0); // Up
+
+  loadTextures();
 
 /* set up initial values */
 
@@ -120,6 +124,7 @@ void reshape (int w, int h) {
     glViewport(0, 0, (GLsizei) w, (GLsizei) h); 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    //gluPerspective(40.0, (GLfloat) w/(GLfloat) h, 1.0, 100.0);
     glMatrixMode (GL_MODELVIEW);
 
     WINDOW_MAX_X = w;
@@ -151,14 +156,16 @@ int main(int argc, char** argv)
     glutInitWindowPosition(0,0); 
     glEnable(GL_DEPTH_TEST);
     glutCreateWindow("The Git and the Pendulum"); 
+    glewInit();
     myinit(); 
-    glShadeModel(GL_SMOOTH);
-    glEnable(GL_NORMALIZE);
+    //glShadeModel(GL_SMOOTH);
+    //glEnable(GL_NORMALIZE);
+    //glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboardDown);
     glutKeyboardUpFunc(keyboardUp);
     glutDisplayFunc(display); 
     glutIdleFunc(display); 
-    glutMotionFunc(mouseMove);
+    //glutMotionFunc(mouseMove);
     glClearColor(0.1,0.1,0.1,0.0);
     glutMainLoop();
 }

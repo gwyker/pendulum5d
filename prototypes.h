@@ -38,6 +38,8 @@ void step(double &t, double &theta, double &omega );
 void moveCamera(void);
 void mouseCamera(void);
 void displayTextures(void);
+void displayTexturesTest(void);
 void loadTextures(void);
+void displayPendulum(void);
 
 #endif
