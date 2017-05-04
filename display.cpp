@@ -29,26 +29,32 @@ void display(void)
 
 void display(void)
 {
+  //glEnable(GL_TEXTURE_2D);
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
   moveCamera();
+  step(t, theta, omega);
 
   glColor3f(0.5f, 0.5f, 1.0f);
-    glBegin(GL_QUADS);
-    glVertex3f(-100.0f, 0.0f, -100.0f);
-    glVertex3f(-100.0f, 0.0f,  100.0f);
-    glVertex3f( 100.0f, 0.0f,  100.0f);
-    glVertex3f( 100.0f, 0.0f, -100.0f);
-  glEnd();
-  glColor3f(1.0f, 0.5f, 0.5f);
-  glutSolidCube(2.0);
+  glPushMatrix();
+  glutSolidSphere(1.0f,8,8); //radius, slices, stacks
+  glTranslatef(0.0f, 0.0f, 1.0f); //move up to draw arm
+  glRotatef(theta*(180.0/M_PI), 0.0, 0.0, 1.0); //rotate arm to theta
+  GLUquadricObj *qobj;
+  qobj = gluNewQuadric();
+  gluQuadricDrawStyle(qobj, GLU_FILL);
+  glColor3f(0.5f, 0.8f, 0.0f);
+  gluCylinder(qobj, 0.5f, 0.5f, 5.0f, 8, 8);
+  // glColor3f(1.0f, 0.5f, 0.5f);
+  // glutSolidCube(2.0);
+  glPopMatrix();
   glutSwapBuffers();
 }
 
 void moveCamera(void) {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  cout << angle << endl << "  " << vectorX << endl;;
+  cout << angle << endl << "  " << vectorX << endl;
     gluLookAt(posX, 1.0, posZ,  /* eye is at (0,0,5) */
     posX + vectorX, 1.0, posZ + vectorZ,      /* center is at (0,0,0) */
     0.0, 1.0, 0.0);      /* up is in positive Y direction */

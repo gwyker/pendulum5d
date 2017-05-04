@@ -64,12 +64,12 @@ void keyboard( unsigned char key, int x, int y ) {
         vectorZ = -cos(angle);
     }
     if ( key == 'w' || key == 'W') {
-        posX += vectorX * 0.2;
-        posZ += vectorZ * 0.2;
+        posX += vectorX * 0.9;
+        posZ += vectorZ * 0.9;
     }
     if ( key == 's' || key == 'S') {
-        posX -= vectorX * 0.2;
-        posZ -= vectorZ * 0.2;
+        posX -= vectorX * 0.9;
+        posZ -= vectorZ * 0.9;
     }
 }
 
