@@ -29,7 +29,7 @@ double omegadot(double t, double theta, double omega)
    kick =  A*cos(k*t);
    //denom = m*pow(R,2.0);
    denom = 1.0;
-   cout << "damp = " << damp << "speed = " << omega << endl;
+   // cout << "damp = " << damp << "speed = " << omega << endl;
    return -g/R*sin(theta)+damp/denom+kick/denom;
 }
 

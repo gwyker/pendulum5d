@@ -1,6 +1,7 @@
 #include "prototypes.h"
 
-int WINDOW_MAX = 800;
+int WINDOW_MAX_X = 800;
+int WINDOW_MAX_Y = 800;
 double Nstep = 1000.0;
 //float angle, length, gravity, damping, amplitude, freq;
 double R, g, b, m, A, k;
@@ -11,11 +12,17 @@ double theta=M_PI/2.0;
 //double theta=0.0;
 double omega=1.5;
 
-double angle = 0.0;
+double angleX = 0.0;
+double angleZ = 0.0;
+double angleDeltaX = 0.0;
+double angleDeltaY = 0.0;
 double vectorX = 0.0;
+double vectorY = 0.0;
 double vectorZ = -1.0;
 double posX = 0.0;
+double posY = 1.0;
 double posZ = 5.0;
+double moveSpeed = 0.0;
 
 void myinit( void )
 {
@@ -28,11 +35,11 @@ void myinit( void )
     glClear (GL_COLOR_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
-  gluPerspective( /* field of view in degree */ 40.0,
+  gluPerspective( /* field of view in degree */ 45.0,
     /* aspect ratio */ 1.0,
-    /* Z near */ 1.0, /* Z far */ 10.0);
+    /* Z near */ 0.1, /* Z far */ 100.0);
   glMatrixMode(GL_MODELVIEW);
-  gluLookAt(8.0, 3.0, 5.0,  /* eye is at (0,0,5) */
+  gluLookAt(0.0, 0.0, 15.0,  /* eye is at (0,0,5) */
     0.0, 0.0, 0.0,      /* center is at (0,0,0) */
     0.0, 1.0, 0.);      /* up is in positive Y direction */
 
@@ -48,34 +55,59 @@ void myinit( void )
       //initialize();
 }
 
-void keyboard( unsigned char key, int x, int y ) {
-    if ( key == 'q' || key == 'Q') //exit program
-        exit(0);
-    if ( key == 'a' || key == 'A') { //exit program
-        angle -= 0.01;
-        cout << "test\n";
-        vectorX = sin(angle);
-        vectorZ = -cos(angle);
-    }
-    if ( key == 'd' || key == 'D') { //exit program
-    	angle += 0.01;
-        cout << "test\n";
-        vectorX = sin(angle);
-        vectorZ = -cos(angle);
-    }
-    if ( key == 'w' || key == 'W') {
-        posX += vectorX * 0.9;
-        posZ += vectorZ * 0.9;
-    }
-    if ( key == 's' || key == 'S') {
-        posX -= vectorX * 0.9;
-        posZ -= vectorZ * 0.9;
+void keyboardDown( unsigned char key, int x, int y ) {
+    switch (key) {
+        case 'q':
+            exit(0);
+            break;
+        case 'w':
+            moveSpeed = 0.5;
+            break;
+        case 's':
+            moveSpeed = -0.5;
+            break;
     }
 }
 
-void arrowkeys ( int key, int x, int y)
-{
-    
+void keyboardUp( unsigned char key, int x, int y ) {
+    switch (key) {
+        case 'q':
+            exit(0);
+            break;
+        case 'w':
+            moveSpeed = 0.0;
+            break;
+        case 's':
+            moveSpeed = 0.0;
+            break;
+    }
+}
+
+void mouseMove(int x, int y) {
+        y=WINDOW_MAX_Y-y;
+        int midX = WINDOW_MAX_X/2;
+        int midY = WINDOW_MAX_Y/2;
+
+        angleX += (x-midX) / 100000.0;
+        angleZ += (y-midY) / 100000.0;
+
+        cout << "diffX = " << (x-midX) << endl << "diffY = " << (y-midY) << endl;
+
+        if (angleX > 1.0)
+            angleX = -1.0;
+        if (angleX < -1.0)
+            angleX = 1.0;
+        if (angleZ > 1.0)
+            angleZ = -1.0;
+        if (angleZ < -1.0)
+            angleZ = 1.0;
+
+        // update x and z vectors
+        vectorX = cos(angleX);
+        vectorY = -sin(angleX);
+        vectorZ = tan(angleZ);
+
+        // glutWarpPointer(midX, WINDOW_MAX_Y-midY);
 }
 
 void reshape (int w, int h) {
@@ -83,6 +115,9 @@ void reshape (int w, int h) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glMatrixMode (GL_MODELVIEW);
+
+    WINDOW_MAX_X = w;
+    WINDOW_MAX_Y = h;
 }
 
 void initialize(void) {
@@ -106,17 +141,19 @@ int main(int argc, char** argv)
 {
     glutInit(&argc,argv);
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); 
-    glutInitWindowSize(WINDOW_MAX, WINDOW_MAX); 
+    glutInitWindowSize(WINDOW_MAX_X, WINDOW_MAX_Y); 
     glutInitWindowPosition(0,0); 
     glEnable(GL_DEPTH_TEST);
     glutCreateWindow("The Git and the Pendulum"); 
     myinit(); 
     glShadeModel(GL_SMOOTH);
     glEnable(GL_NORMALIZE);
-    glutKeyboardFunc(keyboard);
+    glutKeyboardFunc(keyboardDown);
+    glutKeyboardUpFunc(keyboardUp);
     glutSpecialFunc(arrowkeys);
     glutDisplayFunc(display); 
     glutIdleFunc(display); 
+    glutMotionFunc(mouseMove);
     glClearColor(0.1,0.1,0.1,0.0);
     glutMainLoop();
 }

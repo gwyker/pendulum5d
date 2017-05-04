@@ -14,7 +14,7 @@ extern double R, g, b, m, A, k;
 extern double theta, omega, t;
 extern double Nstep;
 extern bool animate;
-extern double angle, vectorX, vectorZ, posX, posZ;
+extern double angleX, angleZ, vectorX, vectorY, vectorZ, posX, posY, posZ, moveSpeed;
 
 using namespace std;
 
@@ -32,5 +32,6 @@ void drawPendulum (vertex *points, int pointCount);
 void initialize (void);
 void step(double &t, double &theta, double &omega );
 void moveCamera(void);
+void mouseCamera(void);
 
 #endif
