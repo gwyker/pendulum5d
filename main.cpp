@@ -42,13 +42,13 @@ void myinit( void )
     /* aspect ratio */ 1.0,
     /* Z near */ 0.1, /* Z far */ 100.0);
   glMatrixMode(GL_MODELVIEW);
-  // gluLookAt(0.0, 0.0, 15.0,  /* eye is at (0,0,5) */
-  //   0.0, 0.0, 0.0,       center is at (0,0,0) 
-  //   0.0, 1.0, 0.);      /* up is in positive Y direction */
+  gluLookAt(0.0, 0.0, 15.0,  /* eye is at (0,0,5) */
+    0.0, 0.0, 0.0,   //    center is at (0,0,0) 
+    0.0, 1.0, 0.);      /* up is in positive Y direction */
 
-      gluLookAt(  20.0,   20.0,   20.0,  // Eye
-                0.0,   0.0, 0.0,  // Center
-                0.0,   0.0, 1.0); // Up
+      // gluLookAt(  20.0,   20.0,   20.0,  // Eye
+      //           0.0,   0.0, 0.0,  // Center
+      //           0.0,   0.0, 1.0); // Up
 
   loadTextures();
 
@@ -165,7 +165,7 @@ int main(int argc, char** argv)
     glutKeyboardUpFunc(keyboardUp);
     glutDisplayFunc(display); 
     glutIdleFunc(display); 
-    //glutMotionFunc(mouseMove);
+    glutMotionFunc(mouseMove);
     glClearColor(0.1,0.1,0.1,0.0);
     glutMainLoop();
 }

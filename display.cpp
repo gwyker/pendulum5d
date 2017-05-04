@@ -31,7 +31,7 @@ void display(void)
 {
   displayTexturesTest();
 
-  //moveCamera();
+  moveCamera();
   step(t, theta, omega);
 
   displayPendulum();
@@ -74,7 +74,7 @@ void displayTextures(void) {
     glPushMatrix();
     glLoadIdentity();
     glRotatef(90.0,0.0,1.0,0.0);
-    // glTranslatef(0.0,-10.0,0.0);
+    glTranslatef(0.0,-10.0,0.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
@@ -108,7 +108,6 @@ void displayTexturesTest(void) {
 
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glPushMatrix();
-    glLoadIdentity();
     glRotatef(90.0,0.0,1.0,0.0);
     glTranslatef(0.0,-10.0,0.0);
     glBegin(GL_POLYGON);
