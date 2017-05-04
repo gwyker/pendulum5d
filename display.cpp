@@ -37,24 +37,29 @@ void display(void)
   step(t, theta, omega);
 
   glPushMatrix();
-  // Draw ground
+  // // Draw ground
 
-  glColor3f(0.0f, 0.9f, 0.9f);
-  glBegin(GL_QUADS);
-    glVertex3f(-10.0f, 0.0f, -10.0f);
-    glVertex3f(-10.0f, 0.0f,  10.0f);
-    glVertex3f( 10.0f, 0.0f,  10.0f);
-    glVertex3f( 10.0f, 0.0f, -10.0f);
-  glEnd();
-  glColor3f(0.5f, 0.5f, 1.0f);
-  glutSolidSphere(1.0f,8,8); //radius, slices, stacks
+  // glColor3f(0.0f, 0.9f, 0.9f);
+  // glBegin(GL_QUADS);
+  //   glVertex3f(-10.0f, 0.0f, -10.0f);
+  //   glVertex3f(-10.0f, 0.0f,  10.0f);
+  //   glVertex3f( 10.0f, 0.0f,  10.0f);
+  //   glVertex3f( 10.0f, 0.0f, -10.0f);
+  // glEnd();
+
+  //draw arm
+  glRotatef(90.0, 1.0, 0.0, 0.0);
   glTranslatef(0.0f, 0.0f, 1.0f); //move up to draw arm
-  glRotatef(theta*(180.0/M_PI), 0.0, 0.0, 1.0); //rotate arm to theta
+  glRotatef(theta*(180.0/M_PI), 0.0, 1.0, 0.0); //rotate arm to theta
   GLUquadricObj *qobj;
   qobj = gluNewQuadric();
   gluQuadricDrawStyle(qobj, GLU_FILL);
   glColor3f(0.5f, 0.8f, 0.0f);
   gluCylinder(qobj, 0.5f, 0.5f, 5.0f, 8, 8);
+  //draw bell
+  glTranslatef(0.0, 0.0, 5.0);
+  glColor3f(0.5f, 0.5f, 1.0f);
+  glutSolidSphere(1.0f,8,8); //radius, slices, stacks
   // glColor3f(1.0f, 0.5f, 0.5f);
   // glutSolidCube(2.0);
   glPopMatrix();
