@@ -24,6 +24,9 @@ double posY = 1.0;
 double posZ = 5.0;
 double moveSpeed = 0.0;
 
+int mousePrevX = 400;
+int mousePrevY = 400;
+
 void myinit( void )
 {
 /* attributes */
@@ -85,22 +88,20 @@ void keyboardUp( unsigned char key, int x, int y ) {
 
 void mouseMove(int x, int y) {
         y=WINDOW_MAX_Y-y;
-        int midX = WINDOW_MAX_X/2;
-        int midY = WINDOW_MAX_Y/2;
 
-        angleX += (x-midX) / 100000.0;
-        angleZ += (y-midY) / 100000.0;
+        angleZ += (x-mousePrevX) / 100.0;
+        angleX -= (y-mousePrevY) / 100.0;
 
-        cout << "diffX = " << (x-midX) << endl << "diffY = " << (y-midY) << endl;
+        cout << "angleZ = " << angleZ << endl << "angleX = " << angleX << endl;
 
-        if (angleX > 1.0)
-            angleX = -1.0;
-        if (angleX < -1.0)
-            angleX = 1.0;
-        if (angleZ > 1.0)
-            angleZ = -1.0;
-        if (angleZ < -1.0)
-            angleZ = 1.0;
+        if (angleX > (2*M_PI))
+            angleX = 0.0;
+        if (angleX < 0.0)
+            angleX = (2*M_PI);
+        if (angleZ > (2*M_PI))
+            angleZ = 0.0;
+        if (angleZ < 0.0)
+            angleZ = (2*M_PI);
 
         // update x and z vectors
         vectorX = cos(angleX);
@@ -108,6 +109,9 @@ void mouseMove(int x, int y) {
         vectorZ = tan(angleZ);
 
         // glutWarpPointer(midX, WINDOW_MAX_Y-midY);
+
+        mousePrevX = x;
+        mousePrevY = y;
 }
 
 void reshape (int w, int h) {
