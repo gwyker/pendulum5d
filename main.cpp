@@ -150,7 +150,6 @@ int main(int argc, char** argv)
     glEnable(GL_NORMALIZE);
     glutKeyboardFunc(keyboardDown);
     glutKeyboardUpFunc(keyboardUp);
-    glutSpecialFunc(arrowkeys);
     glutDisplayFunc(display); 
     glutIdleFunc(display); 
     glutMotionFunc(mouseMove);
