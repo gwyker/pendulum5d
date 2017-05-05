@@ -1,5 +1,7 @@
 #include "prototypes.h"
 
+GLUquadric *bell;
+
 int WINDOW_MAX_X = 800;
 int WINDOW_MAX_Y = 800;
 double Nstep = 1000.0;
@@ -53,6 +55,9 @@ void myinit( void )
       // gluLookAt(  20.0,   20.0,   20.0,  // Eye
       //           0.0,   0.0, 0.0,  // Center
       //           0.0,   0.0, 1.0); // Up
+
+  bell = gluNewQuadric();
+  gluQuadricTexture( bell, GL_TRUE);
 
   loadTextures();
 

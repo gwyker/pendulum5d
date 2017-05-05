@@ -13,6 +13,7 @@
 #include "SOIL.h"
 
 extern GLuint textureID[8];
+extern GLUquadric *bell;
 
 extern double R, g, b, m, A, k;
 extern double theta, omega, t;

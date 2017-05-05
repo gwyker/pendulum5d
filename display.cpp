@@ -57,9 +57,12 @@ void drawPendulum(void) {
 
   //draw bell
 
+  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 100.0);
+  glBindTexture ( GL_TEXTURE_2D, textureID[2]);
   glTranslatef(0.0, 0.0, 5.0);
-  glColor3f(0.5f, 0.5f, 1.0f);
-  glutSolidSphere(1.0f,8,8); //radius, slices, stacks
+  glScalef(1.0,-1.0,1.0);
+  gluSphere( bell, 0.9, 36, 72);
+  //glutSolidSphere(1.0f,8,8); //radius, slices, stacks
 
   glPopMatrix();
 }
