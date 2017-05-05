@@ -36,7 +36,7 @@ void display(void)
 
   displayPendulum();
   glutSolidSphere(1.0f,8,8);
-  cout << "please show a sphere\n";
+  // cout << "please show a sphere\n";
 
   glutSwapBuffers();
 }
@@ -57,6 +57,10 @@ void moveCamera(void) {
     gluLookAt(posX, posY, posZ,  /* eye is at (0,0,5) */
     posX + vectorX, posY + vectorY, posZ + vectorZ,      /* center is at (0,0,0) */
     0.0, 1.0, 0.0);      /* up is in positive Y direction */
+
+    // cout << "X = " << vectorX << "   ";
+    // cout << "Y = " << vectorY << "   ";
+    // cout << "Z = " << vectorZ << "   " << endl;
 }
 
 void displayTextures(void) {
@@ -68,7 +72,7 @@ void displayTextures(void) {
 
     // Bind the texture you want to use and draw the first polygon
 
-    cout << "displaying texture" << endl;
+    // cout << "displaying texture" << endl;
 
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glPushMatrix();
@@ -108,31 +112,32 @@ void displayTexturesTest(void) {
 
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glPushMatrix();
-    glRotatef(90.0,0.0,1.0,0.0);
-    glTranslatef(0.0,-10.0,0.0);
+    glTranslatef(debugX,debugY,debugZ);
+    glTranslatef(-100.0,-10,-100.0);
+    glRotatef(90.0,1.0,0.0,0.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
-      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
-      glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
-      glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 200.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 200.0, 200.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 200.0,  0.0 );
 
     glEnd();
     glPopMatrix();
 
     // Bind the second you want to use and draw the first polygon
 
-    glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glPushMatrix();
     //glLoadIdentity();
-    glRotatef(90.0,1.0,0.0,0.0);
-    glTranslatef(0.0,-10.0,-10.0);
+    //glRotatef(90.0,1.0,0.0,0.0);
+    glTranslatef(0.0,10.0,0.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
       glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
-      glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
-      glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 30.0, 10.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 30.0,  0.0 );
 
     glEnd();
 

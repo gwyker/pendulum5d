@@ -19,6 +19,7 @@ extern double theta, omega, t;
 extern double Nstep;
 extern bool animate;
 extern double angleX, angleZ, vectorX, vectorY, vectorZ, posX, posY, posZ, moveSpeed;
+extern double debugX, debugY, debugZ;
 
 using namespace std;
 
