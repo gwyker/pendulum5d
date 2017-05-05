@@ -1,5 +1,21 @@
 #include "prototypes.h"
 
+void displayPhase(void) {
+  glColor3f(1.0, 1.0, 1.0);
+ 
+  glBegin(GL_LINE);
+    glVertex2f(200, 0);
+    glVertex2f(200, 400);
+  glEnd();
+ 
+  glBegin(GL_LINE);
+    glVertex2f(0, 200);
+    glVertex2f(400, 200);
+  glEnd();
+
+  glutSwapBuffers();
+}
+
 void display(void)
 {
   draw();
@@ -11,7 +27,7 @@ void display(void)
 }
 
 void draw(void) {
-    // Enable Texturing and the Depth Buffer
+    //enable texturing and draw objects
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -28,10 +44,9 @@ void draw(void) {
 
 void moveCamera(void) {
   //move camera position based on movespeed
-  posX += moveSpeed * vectorX * 1.3f;
-  posY += moveSpeed * vectorY * 1.3f;
-  posZ += moveSpeed * vectorZ * 1.3f;
-  // cout << "moveSpeed = " << moveSpeed << endl;
+  posX += moveSpeed * vectorX * 1.5f;
+  posY += moveSpeed * vectorY * 1.5f;
+  posZ += moveSpeed * vectorZ * 1.5f;
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -134,6 +149,23 @@ void drawRoom(void) {
 
     glPopMatrix();
 
+    //front wall
+
+    glPushMatrix();
+    //glLoadIdentity();
+    glTranslatef(-100.0,40.0,100.0);
+    glScalef(1.0,-1.0,1.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 50.0 );
+      glTexCoord2d( 4.0, 1.0);   glVertex2d( 200.0, 50.0 );
+      glTexCoord2d( 4.0, 0.0);   glVertex2d( 200.0,  0.0 );
+
+    glEnd();
+
+    glPopMatrix();
+
     //left wall
 
     glPushMatrix();
@@ -201,7 +233,7 @@ void drawCrib(void) {
     }
   }
 
-  //crib bed
+  //crib bed top
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glPushMatrix();
     //glTranslatef(debugX,debugY,debugZ);
@@ -216,6 +248,59 @@ void drawCrib(void) {
 
     glEnd();
     glPopMatrix();
+
+  //crib bed bottom
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glPushMatrix();
+    //glTranslatef(debugX,debugY,debugZ);
+    glTranslatef(0.0,-3.0,0.0);
+    glRotatef(90.0,1.0,0.0,0.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 30.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 15.0, 30.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 15.0,  0.0 );
+
+    glEnd();
+    glPopMatrix();
+
+  //crib bed left & right
+    for (int i = 0;i < 2;i++) {
+      glBindTexture(GL_TEXTURE_2D, textureID[1]);
+      glPushMatrix();
+      //glTranslatef(debugX,debugY,debugZ);
+      glTranslatef(i * 15.0,-3.0,0.0);
+      glRotatef(90.0,1.0,0.0,0.0);
+      glRotatef(90.0,0.0,1.0,0.0);
+      glBegin(GL_POLYGON);
+
+        glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+        glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 30.0 );
+        glTexCoord2d( 1.0, 1.0);   glVertex2d( 3.0, 30.0 );
+        glTexCoord2d( 1.0, 0.0);   glVertex2d( 3.0,  0.0 );
+
+      glEnd();
+      glPopMatrix();
+    }
+
+  //crib bed back & front
+    for (int i = 0;i < 2;i++) {
+      glBindTexture(GL_TEXTURE_2D, textureID[1]);
+      glPushMatrix();
+      //glTranslatef(debugX,debugY,debugZ);
+      glTranslatef(0.0,0.0,i * 30.0);
+      glRotatef(-90.0,0.0,0.0,1.0);
+      glBegin(GL_POLYGON);
+
+        glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+        glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 15.0 );
+        glTexCoord2d( 1.0, 1.0);   glVertex2d( 3.0, 15.0 );
+        glTexCoord2d( 1.0, 0.0);   glVertex2d( 3.0,  0.0 );
+
+      glEnd();
+      glPopMatrix();
+    }
 
 
 
@@ -271,6 +356,31 @@ void drawCrib(void) {
         glPopMatrix();
   }
 
+    //crib wall rails
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    for (int i = 0; i < 2;i++) {
+
+        glPushMatrix();
+
+        glTranslatef(0.0,10.0,i * 30.0);
+        glRotatef(-90.0, 0.0, 0.0, 1.0);
+    
+
+        glBegin(GL_QUAD_STRIP);
+        for (int k = 0; k <= 359; k++)
+        {
+            glNormal3d(cos(k), 10, sin(k));
+
+            glTexCoord2f(0,0);    glVertex3f(cos(k), 0, sin(k));
+            glTexCoord2f(0,1);    glVertex3f(cos(k), 15, sin(k));
+            glTexCoord2f(1,1);    glVertex3f(cos(k + 1), 15, sin(k + 1));
+            glTexCoord2f(1,0);    glVertex3f(cos(k + 1), 0, sin(k + 1));
+        }
+        glEnd();
+
+        glPopMatrix();
+  }
+
     //pendulum supports
         glBindTexture(GL_TEXTURE_2D, textureID[3]);
         glPushMatrix();
@@ -295,7 +405,7 @@ void drawCrib(void) {
 
         glPushMatrix();
 
-        glTranslatef(0.0,18.0,15.0);
+        glTranslatef(-0.5,17.5,15.0);
         glRotatef(-90.0, 0.0, 0.0, 1.0);
         glScalef(0.5,1.0,0.5);
     
@@ -306,8 +416,8 @@ void drawCrib(void) {
             glNormal3d(cos(k), 10, sin(k));
 
             glTexCoord2f(0,0);    glVertex3f(cos(k), 0, sin(k));
-            glTexCoord2f(0,1);    glVertex3f(cos(k), 7.5, sin(k));
-            glTexCoord2f(1,1);    glVertex3f(cos(k + 1), 7.5, sin(k + 1));
+            glTexCoord2f(0,1);    glVertex3f(cos(k), 8.5, sin(k));
+            glTexCoord2f(1,1);    glVertex3f(cos(k + 1), 8.5, sin(k + 1));
             glTexCoord2f(1,0);    glVertex3f(cos(k + 1), 0, sin(k + 1));
         }
         glEnd();

@@ -113,25 +113,18 @@ void mouseMove(int x, int y) {
         angleX += (x-mousePrevX) / 6.0;
         angleZ += (y-mousePrevY) / 6.0;
 
-        cout << "x = " << x << endl;
-        cout << "y = " << y << endl;
-        cout << "xprev = " << mousePrevX << endl;
-        cout << "yprev = " << mousePrevY << endl;
-        cout << "x-mousePrevX = " << x-mousePrevX << endl;
-        cout << "y-mousePrevY = " << y-mousePrevY << endl;
-
         if(angleX>360)angleX-=360;
         if(angleX<0)angleX+=360;
 
         if(angleZ>90)angleZ=90;
         if(angleZ<-135)angleZ=-135;
 
-        // update x and z vectors
+        // update camera aim vectors
         vectorX = -cos(angleX*M_PI/180.0);
         vectorZ = -sin(angleX*M_PI/180.0);
         vectorY = tan((angleZ+225)*M_PI/180.0);
 
-        // glutWarpPointer(midX, WINDOW_MAX_Y-midY);
+        //glutWarpPointer(WINDOW_MAX_X/2, WINDOW_MAX_Y/2);
 
         mousePrevX = x;
         mousePrevY = y;
@@ -172,6 +165,8 @@ int main(int argc, char** argv)
     glutInitWindowSize(400, 400);
     glutInitWindowPosition(900,0);
     glutCreateWindow("Phase Space");
+    glutDisplayFunc(displayPhase); 
+    phaseinit();
     glutInitWindowSize(WINDOW_MAX_X, WINDOW_MAX_Y); 
     glutInitWindowPosition(0,0); 
     glEnable(GL_DEPTH_TEST);

@@ -147,4 +147,11 @@ void myinit( void )
    glEnable(GL_LIGHT2); //spotlight
 }
 
+void phaseinit(void) {
+  glClearColor(1.0,1.0,1.0,0.0);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+}
+
 #endif

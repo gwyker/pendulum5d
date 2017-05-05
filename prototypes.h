@@ -51,4 +51,6 @@ void drawCrib(void);
 void drawRoom(void);
 void draw(void);
 void myinit(void);
+void phaseinit(void);
+void displayPhase(void);
 #endif
