@@ -98,7 +98,6 @@ void mouseButton(int button, int state, int x, int y) {
             if (state == GLUT_DOWN) {
                 mousePrevX = x;
                 mousePrevY = WINDOW_MAX_Y-y;
-                cout << "reset x,y\n";
             }
             break;
     }
@@ -106,9 +105,6 @@ void mouseButton(int button, int state, int x, int y) {
 
 void mouseMove(int x, int y) {
         y=WINDOW_MAX_Y-y;
-
-        // cout << "mousePrevX = " << mousePrevX << endl;
-        // cout << "mousePrevY = " << mousePrevY << endl;
 
         angleX += (x-mousePrevX) / 6.0;
         angleZ += (y-mousePrevY) / 6.0;
@@ -134,7 +130,7 @@ void reshape (int w, int h) {
     glViewport(0, 0, (GLsizei) w, (GLsizei) h); 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    //gluPerspective(40.0, (GLfloat) w/(GLfloat) h, 1.0, 100.0);
+    gluPerspective(40.0, (GLfloat) w/(GLfloat) h, 1.0, 100.0);
     glMatrixMode (GL_MODELVIEW);
 
     WINDOW_MAX_X = w;

@@ -44,9 +44,7 @@
 
 void myinit( void )
 {
-/* attributes */
 
-/* set up viewing */
     glClearColor(0.0,0.0,0.0,0.0);
 
     glLoadIdentity();
@@ -61,9 +59,6 @@ void myinit( void )
     0.0, 0.0, 0.0,   //    center is at (0,0,0) 
     0.0, 1.0, 0.);      /* up is in positive Y direction */
 
-      // gluLookAt(  20.0,   20.0,   20.0,  // Eye
-      //           0.0,   0.0, 0.0,  // Center
-      //           0.0,   0.0, 1.0); // Up
 
   bell = gluNewQuadric();
   gluQuadricTexture( bell, GL_TRUE);
@@ -72,16 +67,16 @@ void myinit( void )
 
 /* set up initial values */
 
-    theta = 0;
-    R = 1;
-    g = 1;
-    b = 0;
-    A = 0;
-    k = 0;
+    // theta = 0;
+    // R = 1;
+    // g = 1;
+    // b = 0;
+    // A = 0;
+    // k = 0;
 
-      //initialize();
+    initialize();
 
-    // Now start working on lighting -- turn on some global settings
+// global ambient settings
    global_ambient = { 0.5f, 0.5f, 0.5f, 1.0f };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
    glShadeModel(GL_SMOOTH);
@@ -98,7 +93,7 @@ void myinit( void )
    glMaterialfv(GL_FRONT, GL_EMISSION, material_emission);
    glMaterialfv(GL_FRONT, GL_SPECULAR, material_specular);
 
-   // white light to fill room
+// white light to fill room
 
    light_0_position =  {  -100.0,  40.0,  -100.0, 1.0 };
    light_0_ambient  =  {  0.8,  0.8,  0.8, 1.0 };

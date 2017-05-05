@@ -12,7 +12,7 @@
 #include <cmath>
 #include "SOIL.h"
 
-extern GLuint textureID[8];
+extern GLuint textureID[9];
 extern GLUquadric *bell;
 
 extern GLfloat global_ambient[4];
