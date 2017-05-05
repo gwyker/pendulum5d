@@ -129,7 +129,7 @@ void myinit( void )
    light_2_spot_direction = { 0.0, -1.0, 0.0 };
    light_2_spot_cutoff = 10.0;
    light_2_spot_exponent = 64;
-   light_2_gl_linear_attenuation = 0.3;
+   light_2_gl_linear_attenuation = 0.0;
 
    glLightfv(GL_LIGHT2, GL_POSITION, light_2_position);
    glLightfv(GL_LIGHT2, GL_AMBIENT, light_2_ambient);
