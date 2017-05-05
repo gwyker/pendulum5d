@@ -127,7 +127,7 @@ void displayTexturesTest(void) {
 
     // Bind the second you want to use and draw the first polygon
 
-    glBindTexture(GL_TEXTURE_2D, textureID[0]);
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glPushMatrix();
     //glLoadIdentity();
     //glRotatef(90.0,1.0,0.0,0.0);
