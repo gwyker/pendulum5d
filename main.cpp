@@ -62,26 +62,32 @@ void keyboardUp( unsigned char key, int x, int y ) {
         case 'i':
             debugX += 1.0;
             cout << "debugX = " << debugX << endl;
+            glEnable(GL_LIGHT0);
             break;
         case 'k':
             debugX -= 1.0;
             cout << "debugX = " << debugX << endl;
+            glDisable(GL_LIGHT0);
             break;
         case 'j':
             debugY += 1.0;
             cout << "debugY = " << debugY << endl;
+            glEnable(GL_LIGHT1);
             break;
         case 'l':
             debugY -= 1.0;
             cout << "debugY = " << debugY << endl;
+            glDisable(GL_LIGHT1);
             break;
         case 'u':
             debugZ += 1.0;
             cout << "debugZ = " << debugZ << endl;
+            glEnable(GL_LIGHT2);
             break;
         case 'o':
             debugZ -= 1.0;
             cout << "debugZ = " << debugZ << endl;
+            glDisable(GL_LIGHT2);
             break;
     }
 }
