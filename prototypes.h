@@ -15,6 +15,12 @@
 extern GLuint textureID[8];
 extern GLUquadric *bell;
 
+extern GLfloat global_ambient[4];
+extern GLfloat material_diffuse[4];
+extern GLfloat material_ambient[4];
+extern GLfloat material_emission[4];
+extern GLfloat material_specular[4];
+
 extern double R, g, b, m, A, k;
 extern double theta, omega, t;
 extern double Nstep;
@@ -44,5 +50,5 @@ void drawPendulum(void);
 void drawCrib(void);
 void drawRoom(void);
 void draw(void);
-void myInit(void);
+void myinit(void);
 #endif
