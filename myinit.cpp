@@ -123,11 +123,11 @@ void myinit( void )
 
 // And now its time for a spotlight
 
-   light_2_position =  {  5.0,  3.0,  5.0, 1.0 };
+   light_2_position =  {  7.5,  25.0,  15.0, 1.0 };
    light_2_ambient  =  {  1.0,  1.0,  1.0, 1.0 };
    light_2_diffuse  =  {  1.0,  1.0,  1.0, 1.0 };
    light_2_specular =  {  1.0,  1.0,  1.0, 1.0 };
-   light_2_spot_direction = { 0.0, 1.0, 0.0 };
+   light_2_spot_direction = { 0.0, -1.0, 0.0 };
    light_2_spot_cutoff = 10.0;
    light_2_spot_exponent = 64;
    light_2_gl_linear_attenuation = .3;
