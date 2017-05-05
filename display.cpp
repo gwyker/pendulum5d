@@ -43,9 +43,9 @@ void display(void)
 
 void moveCamera(void) {
   //move camera position based on movespeed
-  posX += moveSpeed * vectorX * 0.3f;
-  posY += moveSpeed * vectorY * 0.3f;
-  posZ += moveSpeed * vectorZ * 0.3f;
+  posX += moveSpeed * vectorX * 1.3f;
+  posY += moveSpeed * vectorY * 1.3f;
+  posZ += moveSpeed * vectorZ * 1.3f;
   // cout << "moveSpeed = " << moveSpeed << endl;
 
   //mouse movement
@@ -128,16 +128,52 @@ void displayTexturesTest(void) {
     // Bind the second you want to use and draw the first polygon
 
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
+
+    //back wall
+
     glPushMatrix();
     //glLoadIdentity();
-    //glRotatef(90.0,1.0,0.0,0.0);
-    glTranslatef(0.0,10.0,0.0);
+    glTranslatef(-100.0,-10.0,-100.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
-      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
-      glTexCoord2d( 1.0, 1.0);   glVertex2d( 30.0, 10.0 );
-      glTexCoord2d( 1.0, 0.0);   glVertex2d( 30.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 50.0 );
+      glTexCoord2d( 4.0, 1.0);   glVertex2d( 200.0, 50.0 );
+      glTexCoord2d( 4.0, 0.0);   glVertex2d( 200.0,  0.0 );
+
+    glEnd();
+
+    glPopMatrix();
+
+    //left wall
+
+    glPushMatrix();
+    //glLoadIdentity();
+    glTranslatef(-100.0,-10.0,100.0);
+    glRotatef(90.0,0.0,1.0,0.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 50.0 );
+      glTexCoord2d( 4.0, 1.0);   glVertex2d( 200.0, 50.0 );
+      glTexCoord2d( 4.0, 0.0);   glVertex2d( 200.0,  0.0 );
+
+    glEnd();
+
+    glPopMatrix();
+
+    //right wall
+
+    glPushMatrix();
+    //glLoadIdentity();
+    glTranslatef(100.0,-10.0,-100.0);
+    glRotatef(-90.0,0.0,1.0,0.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 50.0 );
+      glTexCoord2d( 4.0, 1.0);   glVertex2d( 200.0, 50.0 );
+      glTexCoord2d( 4.0, 0.0);   glVertex2d( 200.0,  0.0 );
 
     glEnd();
 
