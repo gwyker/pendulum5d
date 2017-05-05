@@ -42,24 +42,35 @@ void moveCamera(void) {
 }
 
 void drawPendulum(void) {
-  glPushMatrix();
-
+  
   //draw arm
 
-  glRotatef(90.0, 1.0, 0.0, 0.0);
-  glTranslatef(7.5, 15.0, -15.0); //move up to draw arm
-  glRotatef(theta*(180.0/M_PI), 0.0, 1.0, 0.0); //rotate arm to theta
-  GLUquadricObj *qobj;
-  qobj = gluNewQuadric();
-  gluQuadricDrawStyle(qobj, GLU_FILL);
-  glColor3f(0.5f, 0.8f, 0.0f);
-  gluCylinder(qobj, 0.5f, 0.5f, 5.0f, 8, 8);
+  glPushMatrix();
+  glTranslatef(7.5, 15.0, 15.0); //move up to draw arm
+  glRotatef(theta*(180.0/M_PI), 0.0, 0.0, 1.0); //rotate arm to theta
+  glRotatef(180.0, 0.0, 0.0, 1.0);
+  glPushMatrix();
+  glScalef(0.3, 1.0, 0.3);
+  
+    glBegin(GL_QUAD_STRIP);
+    for (int k = 0; k <= 359; k++)
+    {
+        glNormal3d(cos(k), 10, sin(k));
+
+        glTexCoord2f(0,0);    glVertex3f(cos(k), 0, sin(k));
+        glTexCoord2f(0,1);    glVertex3f(cos(k), 5, sin(k));
+        glTexCoord2f(1,1);    glVertex3f(cos(k + 1), 5, sin(k + 1));
+        glTexCoord2f(1,0);    glVertex3f(cos(k + 1), 0, sin(k + 1));
+    }
+    glEnd();
+
+    glPopMatrix();
 
   //draw bell
 
   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 100.0);
-  glBindTexture ( GL_TEXTURE_2D, textureID[2]);
-  glTranslatef(0.0, 0.0, 5.0);
+  glBindTexture ( GL_TEXTURE_2D, textureID[4]);
+  glTranslatef(0.0, 5.0, 0.0);
   glScalef(1.0,-1.0,1.0);
   gluSphere( bell, 0.9, 36, 72);
   //glutSolidSphere(1.0f,8,8); //radius, slices, stacks
