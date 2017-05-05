@@ -149,17 +149,6 @@ void mouseMove(int x, int y) {
         cout << "x-mousePrevX = " << x-mousePrevX << endl;
         cout << "y-mousePrevY = " << y-mousePrevY << endl;
 
-        // cout << "angleZ = " << angleZ << endl << "angleX = " << angleX << endl;
-
-        // if (angleX > (2*M_PI))
-        //     angleX = 0.0;
-        // if (angleX < 0.0)
-        //     angleX = (2*M_PI);
-        // if (angleZ > (2*M_PI))
-        //     angleZ = 0.0;
-        // if (angleZ < 0.0)
-        //     angleZ = (2*M_PI);
-
         if(angleX>360)angleX-=360;
         if(angleX<0)angleX+=360;
 

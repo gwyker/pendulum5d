@@ -12,7 +12,7 @@
 #include <cmath>
 #include "SOIL.h"
 
-extern GLuint textureID[2];
+extern GLuint textureID[8];
 
 extern double R, g, b, m, A, k;
 extern double theta, omega, t;
