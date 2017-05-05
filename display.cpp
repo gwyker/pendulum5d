@@ -204,7 +204,7 @@ void drawCrib(void) {
   //crib bed
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glPushMatrix();
-    glTranslatef(debugX,debugY,debugZ);
+    //glTranslatef(debugX,debugY,debugZ);
     glTranslatef(0.0,0,0.0);
     glRotatef(90.0,1.0,0.0,0.0);
     glBegin(GL_POLYGON);

@@ -86,7 +86,7 @@ void myinit( void )
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
    glShadeModel(GL_SMOOTH);
 
-// these are material properties
+// material properties
 
    material_ambient  = { 0.5, 0.5, 0.5, 1.0 };
    material_diffuse  = { 0.2, 0.2, 0.2, 1.0 };
@@ -97,20 +97,19 @@ void myinit( void )
    glMaterialfv(GL_FRONT, GL_AMBIENT, material_ambient);
    glMaterialfv(GL_FRONT, GL_EMISSION, material_emission);
    glMaterialfv(GL_FRONT, GL_SPECULAR, material_specular);
-//   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 25.0);
 
-   // These are light properties -- notice, specified for EACH light
+   // white light to fill room
 
-   light_0_position =  {  5.0,  5.0,  0.0, 1.0 };
-   light_0_ambient  =  {  1.0,  0.0,  0.0, 1.0 };
-   light_0_diffuse  =  {  1.0,  0.0,  0.0, 1.0 };
+   light_0_position =  {  -100.0,  40.0,  -100.0, 1.0 };
+   light_0_ambient  =  {  0.8,  0.8,  0.8, 1.0 };
+   light_0_diffuse  =  {  0.8,  0.8,  0.8, 1.0 };
    light_0_specular =  {  1.0,  0.0,  0.0, 1.0 };
    glLightfv(GL_LIGHT0, GL_POSITION, light_0_position);
    glLightfv(GL_LIGHT0, GL_AMBIENT, light_0_ambient);
    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_0_diffuse);
    glLightfv(GL_LIGHT0, GL_SPECULAR, light_0_specular);
 
-// Lets set up a second light
+// blue light filling room
 
    light_1_position =  {  5.0,  10.0,  5.0, 1.0 };
    light_1_ambient  =  {  0.0,  0.0,  1.0, 1.0 };
@@ -121,16 +120,16 @@ void myinit( void )
    glLightfv(GL_LIGHT1, GL_DIFFUSE, light_1_diffuse);
    glLightfv(GL_LIGHT1, GL_SPECULAR, light_1_specular);
 
-// And now its time for a spotlight
+// spotlight on crib
 
    light_2_position =  {  7.5,  25.0,  15.0, 1.0 };
-   light_2_ambient  =  {  1.0,  1.0,  1.0, 1.0 };
-   light_2_diffuse  =  {  1.0,  1.0,  1.0, 1.0 };
-   light_2_specular =  {  1.0,  1.0,  1.0, 1.0 };
+   light_2_ambient  =  {  1.0,  0.0,  0.0, 1.0 };
+   light_2_diffuse  =  {  1.0,  0.0,  0.0, 1.0 };
+   light_2_specular =  {  1.0,  0.0,  0.0, 1.0 };
    light_2_spot_direction = { 0.0, -1.0, 0.0 };
    light_2_spot_cutoff = 10.0;
    light_2_spot_exponent = 64;
-   light_2_gl_linear_attenuation = .3;
+   light_2_gl_linear_attenuation = 0.3;
 
    glLightfv(GL_LIGHT2, GL_POSITION, light_2_position);
    glLightfv(GL_LIGHT2, GL_AMBIENT, light_2_ambient);
@@ -143,9 +142,9 @@ void myinit( void )
  
 
    glEnable(GL_LIGHTING);
-   glEnable(GL_LIGHT0);
-   glEnable(GL_LIGHT1);
-   glEnable(GL_LIGHT2);
+   glEnable(GL_LIGHT0); //white ambient
+   glEnable(GL_LIGHT1); //blue diffuse
+   glEnable(GL_LIGHT2); //spotlight
 }
 
 #endif
