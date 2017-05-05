@@ -38,11 +38,10 @@ void initialize (void);
 void step(double &t, double &theta, double &omega );
 void moveCamera(void);
 void mouseCamera(void);
-void displayTextures(void);
-void displayTexturesTest(void);
 void loadTextures(void);
 void drawPendulum(void);
 void drawCrib(void);
 void drawRoom(void);
+void draw(void);
 
 #endif
