@@ -244,7 +244,7 @@ void drawCrib(void) {
     glPopMatrix();
 
   //crib bed bottom
-    glBindTexture(GL_TEXTURE_2D, textureID[6]);
+    glBindTexture(GL_TEXTURE_2D, textureID[8]);
     glPushMatrix();
     //glTranslatef(debugX,debugY,debugZ);
     glTranslatef(0.0,-3.0,0.0);
@@ -252,8 +252,8 @@ void drawCrib(void) {
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
-      glTexCoord2d( 0.0, 2.0);   glVertex2d(  0.0, 30.0 );
-      glTexCoord2d( 1.0, 2.0);   glVertex2d( 15.0, 30.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 30.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 15.0, 30.0 );
       glTexCoord2d( 1.0, 0.0);   glVertex2d( 15.0,  0.0 );
 
     glEnd();

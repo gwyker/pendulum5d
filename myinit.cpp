@@ -142,6 +142,23 @@ void myinit( void )
    glEnable(GL_LIGHT2); //spotlight
 }
 
+void initialize(void) {
+    cout << "Please enter the initial values for this simulation.\n\n";
+    cout << "Initial angle (degrees): ";
+        cin >> theta;
+        theta *= (M_PI/180);
+    cout << "Pendulum length: ";
+        cin >> R;
+    cout << "Gravitational constant: ";
+        cin >> g;
+    cout << "Damping constant: ";
+        cin >> b;
+    cout << "Amplitude of the impulse: ";
+        cin >> A;
+    cout << "Frequency of the impulse: ";
+        cin >> k;                    
+}
+
 void phaseinit(void) {
   glClearColor(1.0,1.0,1.0,0.0);
   glMatrixMode(GL_PROJECTION);
