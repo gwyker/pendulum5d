@@ -29,7 +29,7 @@ void display(void)
 
 void display(void)
 {
-  displayTexturesTest();
+  displayTextures();
 
   moveCamera();
   step(t, theta, omega);
@@ -63,7 +63,7 @@ void moveCamera(void) {
     // cout << "Z = " << vectorZ << "   " << endl;
 }
 
-void displayTextures(void) {
+void displayTexturesTest(void) {
     // Enable Texturing and the Depth Buffer
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
@@ -97,7 +97,7 @@ void displayTextures(void) {
     glDisable(GL_TEXTURE_2D);
 }
 
-void displayTexturesTest(void) {
+void displayTextures(void) {
       // Enable Texturing and the Depth Buffer
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
@@ -108,7 +108,7 @@ void displayTexturesTest(void) {
     glutSolidSphere(1.0f,8,8);
 
 
-    // Bind the texture you want to use and draw the first polygon
+    //floor
 
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glPushMatrix();
@@ -129,11 +129,29 @@ void displayTexturesTest(void) {
 
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
 
+    //ceiling
+
+    glPushMatrix();
+    //glLoadIdentity();
+    glTranslatef(-100.0,40,-100.0);
+    glRotatef(90.0,1.0,0.0,0.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 200.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 200.0, 200.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 200.0,  0.0 );
+
+    glEnd();
+
+    glPopMatrix();
+
     //back wall
 
     glPushMatrix();
     //glLoadIdentity();
-    glTranslatef(-100.0,-10.0,-100.0);
+    glTranslatef(-100.0,40.0,-100.0);
+    glScalef(1.0,-1.0,1.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
@@ -149,8 +167,9 @@ void displayTexturesTest(void) {
 
     glPushMatrix();
     //glLoadIdentity();
-    glTranslatef(-100.0,-10.0,100.0);
+    glTranslatef(-100.0,40.0,100.0);
     glRotatef(90.0,0.0,1.0,0.0);
+    glScalef(1.0,-1.0,1.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
@@ -166,8 +185,9 @@ void displayTexturesTest(void) {
 
     glPushMatrix();
     //glLoadIdentity();
-    glTranslatef(100.0,-10.0,-100.0);
+    glTranslatef(100.0,40.0,-100.0);
     glRotatef(-90.0,0.0,1.0,0.0);
+    glScalef(1.0,-1.0,1.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
@@ -178,7 +198,7 @@ void displayTexturesTest(void) {
     glEnd();
 
     glPopMatrix();
- 
+
     // Flush the buffer
     glFlush();
 

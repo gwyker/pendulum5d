@@ -46,7 +46,7 @@ void myinit( void )
     /* aspect ratio */ 1.0,
     /* Z near */ 0.1, /* Z far */ 5000.0);
   glMatrixMode(GL_MODELVIEW);
-  gluLookAt(0.0, 0.0, 15.0,  /* eye is at (0,0,5) */
+  gluLookAt(0.0, 0.0, 25.0,  /* eye is at (0,0,5) */
     0.0, 0.0, 0.0,   //    center is at (0,0,0) 
     0.0, 1.0, 0.);      /* up is in positive Y direction */
 
@@ -169,7 +169,7 @@ void mouseMove(int x, int y) {
         // update x and z vectors
         vectorX = -cos(angleX*M_PI/180.0);
         vectorZ = -sin(angleX*M_PI/180.0);
-        vectorY = tan(angleZ*M_PI/180.0);
+        vectorY = tan((angleZ+225)*M_PI/180.0);
 
         // glutWarpPointer(midX, WINDOW_MAX_Y-midY);
 
@@ -209,6 +209,9 @@ int main(int argc, char** argv)
 {
     glutInit(&argc,argv);
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); 
+    glutInitWindowSize(400, 400);
+    glutInitWindowPosition(900,0);
+    glutCreateWindow("Phase Space");
     glutInitWindowSize(WINDOW_MAX_X, WINDOW_MAX_Y); 
     glutInitWindowPosition(0,0); 
     glEnable(GL_DEPTH_TEST);
