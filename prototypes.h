@@ -41,6 +41,8 @@ void mouseCamera(void);
 void displayTextures(void);
 void displayTexturesTest(void);
 void loadTextures(void);
-void displayPendulum(void);
+void drawPendulum(void);
+void drawCrib(void);
+void drawRoom(void);
 
 #endif

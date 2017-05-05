@@ -104,10 +104,48 @@ void displayTextures(void) {
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
     //glColor3ub(0,255,255);
+    drawRoom();
+    drawCrib();
 
-    glutSolidSphere(1.0f,8,8);
+    // Flush the buffer
+    glFlush();
 
+    // For completeness turn off these options
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
+}
 
+void drawPendulum(void) {
+  glPushMatrix();
+  // // Draw ground
+
+  // glColor3f(0.0f, 0.9f, 0.9f);
+  // glBegin(GL_QUADS);
+  //   glVertex3f(-10.0f, 0.0f, -10.0f);
+  //   glVertex3f(-10.0f, 0.0f,  10.0f);
+  //   glVertex3f( 10.0f, 0.0f,  10.0f);
+  //   glVertex3f( 10.0f, 0.0f, -10.0f);
+  // glEnd();
+
+  //draw arm
+  glRotatef(90.0, 1.0, 0.0, 0.0);
+  glTranslatef(7.5, 15.0, -15.0); //move up to draw arm
+  glRotatef(theta*(180.0/M_PI), 0.0, 1.0, 0.0); //rotate arm to theta
+  GLUquadricObj *qobj;
+  qobj = gluNewQuadric();
+  gluQuadricDrawStyle(qobj, GLU_FILL);
+  glColor3f(0.5f, 0.8f, 0.0f);
+  gluCylinder(qobj, 0.5f, 0.5f, 5.0f, 8, 8);
+  //draw bell
+  glTranslatef(0.0, 0.0, 5.0);
+  glColor3f(0.5f, 0.5f, 1.0f);
+  glutSolidSphere(1.0f,8,8); //radius, slices, stacks
+  // glColor3f(1.0f, 0.5f, 0.5f);
+  // glutSolidCube(2.0);
+  glPopMatrix();
+}
+
+void drawRoom(void) {
     //floor
 
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
@@ -198,7 +236,10 @@ void displayTextures(void) {
     glEnd();
 
     glPopMatrix();
-///////////////////objects/////////////////////////
+
+  }
+
+void drawCrib(void) {
     //crib leg
 
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
@@ -303,43 +344,4 @@ void displayTextures(void) {
     glEnd();
 
     glPopMatrix();
-
-
-
-    // Flush the buffer
-    glFlush();
-
-    // For completeness turn off these options
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_TEXTURE_2D);
-}
-
-void displayPendulum(void) {
-  glPushMatrix();
-  // // Draw ground
-
-  // glColor3f(0.0f, 0.9f, 0.9f);
-  // glBegin(GL_QUADS);
-  //   glVertex3f(-10.0f, 0.0f, -10.0f);
-  //   glVertex3f(-10.0f, 0.0f,  10.0f);
-  //   glVertex3f( 10.0f, 0.0f,  10.0f);
-  //   glVertex3f( 10.0f, 0.0f, -10.0f);
-  // glEnd();
-
-  //draw arm
-  glRotatef(90.0, 1.0, 0.0, 0.0);
-  glTranslatef(7.5, 15.0, -15.0); //move up to draw arm
-  glRotatef(theta*(180.0/M_PI), 0.0, 1.0, 0.0); //rotate arm to theta
-  GLUquadricObj *qobj;
-  qobj = gluNewQuadric();
-  gluQuadricDrawStyle(qobj, GLU_FILL);
-  glColor3f(0.5f, 0.8f, 0.0f);
-  gluCylinder(qobj, 0.5f, 0.5f, 5.0f, 8, 8);
-  //draw bell
-  glTranslatef(0.0, 0.0, 5.0);
-  glColor3f(0.5f, 0.5f, 1.0f);
-  glutSolidSphere(1.0f,8,8); //radius, slices, stacks
-  // glColor3f(1.0f, 0.5f, 0.5f);
-  // glutSolidCube(2.0);
-  glPopMatrix();
-}
+ } 
