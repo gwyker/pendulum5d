@@ -231,17 +231,79 @@ void displayTextures(void) {
 
     glPushMatrix();
     glTranslatef(debugX,debugY,debugZ);
-    glTranslatef(-100.0,0,-100.0);
+    glTranslatef(0.0,0,0.0);
     glRotatef(90.0,1.0,0.0,0.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
-      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 200.0 );
-      glTexCoord2d( 1.0, 1.0);   glVertex2d( 100.0, 200.0 );
-      glTexCoord2d( 1.0, 0.0);   glVertex2d( 100.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 30.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 15.0, 30.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 15.0,  0.0 );
 
     glEnd();
     glPopMatrix();
+
+    //crib railing pillars
+
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    for (int i = 0; i < 7;i++) {
+      for (int j = 0; j < 2;j++) {
+
+        glPushMatrix();
+
+        glTranslatef(j * 15.0,0.0,i * 5.0);
+        glScalef(0.5,1.0,0.5);
+
+        glBegin(GL_QUAD_STRIP);
+        for (int k = 0; k <= 359; k++)
+        {
+            glNormal3d(cos(k), 1, sin(k));
+
+            glTexCoord2f(0,0);    glVertex3f(cos(k), 0, sin(k));
+            glTexCoord2f(0,1);    glVertex3f(cos(k), 8, sin(k));
+            glTexCoord2f(1,1);    glVertex3f(cos(k + 1), 8, sin(k + 1));
+            glTexCoord2f(1,0);    glVertex3f(cos(k + 1), 0, sin(k + 1));
+        }
+        glEnd();
+
+        glPopMatrix();
+    }
+  }
+
+    //crib back wall
+
+    glPushMatrix();
+    //glLoadIdentity();
+    glTranslatef(0.0,10.0,0.0);
+    glScalef(1.0,-1.0,1.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
+      glTexCoord2d( 4.0, 1.0);   glVertex2d( 15.0, 10.0 );
+      glTexCoord2d( 4.0, 0.0);   glVertex2d( 15.0,  0.0 );
+
+    glEnd();
+
+    glPopMatrix();
+
+    //crib front wall
+
+    glPushMatrix();
+    //glLoadIdentity();
+    glTranslatef(0.0,10.0,30.0);
+    glScalef(1.0,-1.0,1.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
+      glTexCoord2d( 4.0, 1.0);   glVertex2d( 15.0, 10.0 );
+      glTexCoord2d( 4.0, 0.0);   glVertex2d( 15.0,  0.0 );
+
+    glEnd();
+
+    glPopMatrix();
+
 
 
     // Flush the buffer
@@ -266,7 +328,7 @@ void displayPendulum(void) {
 
   //draw arm
   glRotatef(90.0, 1.0, 0.0, 0.0);
-  glTranslatef(0.0f, 0.0f, 1.0f); //move up to draw arm
+  glTranslatef(7.5, 15.0, -15.0); //move up to draw arm
   glRotatef(theta*(180.0/M_PI), 0.0, 1.0, 0.0); //rotate arm to theta
   GLUquadricObj *qobj;
   qobj = gluNewQuadric();

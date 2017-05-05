@@ -20,8 +20,8 @@ double vectorX = 0.0;
 double vectorY = 0.0;
 double vectorZ = -1.0;
 double posX = 0.0;
-double posY = 0.0;
-double posZ = 20.0;
+double posY = 20.0;
+double posZ = 70.0;
 double moveSpeed = 0.0;
 
 double debugX = 0.0;
@@ -164,7 +164,7 @@ void mouseMove(int x, int y) {
         if(angleX<0)angleX+=360;
 
         if(angleZ>90)angleZ=90;
-        if(angleZ<-90)angleZ=-90;
+        if(angleZ<-135)angleZ=-135;
 
         // update x and z vectors
         vectorX = -cos(angleX*M_PI/180.0);
