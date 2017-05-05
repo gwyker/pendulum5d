@@ -111,8 +111,6 @@ void drawRoom(void) {
     glEnd();
     glPopMatrix();
 
-    // Bind the second you want to use and draw the first polygon
-
     glBindTexture(GL_TEXTURE_2D, textureID[5]);
 
     //ceiling
@@ -137,7 +135,6 @@ void drawRoom(void) {
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
 
     glPushMatrix();
-    //glLoadIdentity();
     glTranslatef(-100.0,40.0,-100.0);
     glScalef(1.0,-1.0,1.0);
     glBegin(GL_POLYGON);
@@ -154,7 +151,6 @@ void drawRoom(void) {
     //front wall
 
     glPushMatrix();
-    //glLoadIdentity();
     glTranslatef(-100.0,40.0,100.0);
     glScalef(1.0,-1.0,1.0);
     glBegin(GL_POLYGON);
@@ -171,7 +167,6 @@ void drawRoom(void) {
     //left wall
 
     glPushMatrix();
-    //glLoadIdentity();
     glTranslatef(-100.0,40.0,100.0);
     glRotatef(90.0,0.0,1.0,0.0);
     glScalef(1.0,-1.0,1.0);
@@ -189,7 +184,6 @@ void drawRoom(void) {
     //right wall
 
     glPushMatrix();
-    //glLoadIdentity();
     glTranslatef(100.0,40.0,-100.0);
     glRotatef(-90.0,0.0,1.0,0.0);
     glScalef(1.0,-1.0,1.0);
@@ -217,7 +211,6 @@ void drawCrib(void) {
 
         glTranslatef(j * 15.0,-10.0,i * 30.0);
         glScalef(0.5,1.0,0.5);
-        //glScalef(1.0,-1.0,1.0);
 
         glBegin(GL_QUAD_STRIP);
         for (int k = 0; k <= 359; k++)
@@ -238,7 +231,6 @@ void drawCrib(void) {
   //crib bed top
     glBindTexture(GL_TEXTURE_2D, textureID[6]);
     glPushMatrix();
-    //glTranslatef(debugX,debugY,debugZ);
     glTranslatef(0.0,0,0.0);
     glRotatef(90.0,1.0,0.0,0.0);
     glBegin(GL_POLYGON);
@@ -271,7 +263,6 @@ void drawCrib(void) {
     for (int i = 0;i < 2;i++) {
       glBindTexture(GL_TEXTURE_2D, textureID[6]);
       glPushMatrix();
-      //glTranslatef(debugX,debugY,debugZ);
       glTranslatef(i * 15.0,-3.0,0.0);
       glRotatef(90.0,1.0,0.0,0.0);
       glRotatef(90.0,0.0,1.0,0.0);
@@ -290,7 +281,6 @@ void drawCrib(void) {
     for (int i = 0;i < 2;i++) {
       glBindTexture(GL_TEXTURE_2D, textureID[6]);
       glPushMatrix();
-      //glTranslatef(debugX,debugY,debugZ);
       glTranslatef(0.0,0.0,i * 30.0);
       glRotatef(-90.0,0.0,0.0,1.0);
       glBegin(GL_POLYGON);
@@ -451,7 +441,6 @@ void drawCrib(void) {
     //crib back wall
     glBindTexture(GL_TEXTURE_2D, textureID[7]);
     glPushMatrix();
-    //glLoadIdentity();
     glTranslatef(0.0,10.0,0.0);
     glScalef(1.0,-1.0,1.0);
     glBegin(GL_POLYGON);
@@ -468,7 +457,6 @@ void drawCrib(void) {
     //crib front wall
 
     glPushMatrix();
-    //glLoadIdentity();
     glTranslatef(0.0,10.0,30.0);
     glScalef(1.0,-1.0,1.0);
     glBegin(GL_POLYGON);
