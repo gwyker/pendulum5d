@@ -166,6 +166,7 @@ int main(int argc, char** argv)
     glutInitWindowPosition(900,0);
     glutCreateWindow("Phase Space");
     glutDisplayFunc(displayPhase); 
+    glutIdleFunc(displayPhase); 
     phaseinit();
     glutInitWindowSize(WINDOW_MAX_X, WINDOW_MAX_Y); 
     glutInitWindowPosition(0,0); 
