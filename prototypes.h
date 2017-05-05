@@ -44,5 +44,5 @@ void drawPendulum(void);
 void drawCrib(void);
 void drawRoom(void);
 void draw(void);
-
+void myInit(void);
 #endif

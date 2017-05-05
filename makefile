@@ -4,7 +4,7 @@ CFLAGS = -g
 COPTFLAGS = 
 LIBFLAGS = -lglut -lGLU -lGL -lm -lGLEW libSOIL.a
 HEADERS = prototypes.h SOIL.h
-OBJECTS = display.o motion.o loadtextures.o
+OBJECTS = display.o motion.o loadtextures.o myinit.o
 
 all : pristine pendulum clean
 
@@ -22,6 +22,9 @@ motion.o : motion.cpp $(HEADERS)
 
 loadtextures.o : loadtextures.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -c loadtextures.cpp
+
+myinit.o : myinit.cpp $(HEADERS)
+	$(CC) $(CFLAGS) -c myinit.cpp
 
 clean :
 	rm *.o

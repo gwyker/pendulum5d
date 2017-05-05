@@ -71,6 +71,24 @@ void myinit( void )
     k = 0;
 
       //initialize();
+
+    // Now start working on lighting -- turn on some global settings
+   global_ambient = { 0.5f, 0.5f, 0.5f, 1.0f };
+   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
+   glShadeModel(GL_SMOOTH);
+
+// these are material properties
+
+   material_ambient  = { 0.5, 0.5, 0.5, 1.0 };
+   material_diffuse  = { 0.2, 0.2, 0.2, 1.0 };
+   material_specular = { 0.2, 0.2, 0.2, 1.0 };
+   material_emission = { 0.2, 0.2, 0.2, 1.0 };
+
+   glMaterialfv(GL_FRONT, GL_DIFFUSE, material_diffuse);
+   glMaterialfv(GL_FRONT, GL_AMBIENT, material_ambient);
+   glMaterialfv(GL_FRONT, GL_EMISSION, material_emission);
+   glMaterialfv(GL_FRONT, GL_SPECULAR, material_specular);
+//   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 25.0);
 }
 
 void keyboardDown( unsigned char key, int x, int y ) {
