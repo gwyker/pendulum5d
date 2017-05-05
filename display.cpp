@@ -198,6 +198,51 @@ void displayTextures(void) {
     glEnd();
 
     glPopMatrix();
+///////////////////objects/////////////////////////
+    //crib leg
+
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
+    for (int i = 0; i < 2;i++) {
+      for (int j = 0; j < 2;j++) {
+
+        glPushMatrix();
+
+        glTranslatef(j * 15.0,-10.0,i * 30.0);
+        //glScalef(1.0,-1.0,1.0);
+
+        glBegin(GL_QUAD_STRIP);
+        for (int k = 0; k <= 359; k++)
+        {
+            glNormal3d(cos(k), 1, sin(k));
+
+            glTexCoord2f(0,0);    glVertex3f(cos(k), 0, sin(k));
+            glTexCoord2f(0,1);    glVertex3f(cos(k), 10, sin(k));
+            glTexCoord2f(1,1);    glVertex3f(cos(k + 1), 10, sin(k + 1));
+            glTexCoord2f(1,0);    glVertex3f(cos(k + 1), 0, sin(k + 1));
+        }
+        glEnd();
+
+        glPopMatrix();
+    }
+  }
+
+
+  //crib bed
+
+    glPushMatrix();
+    glTranslatef(debugX,debugY,debugZ);
+    glTranslatef(-100.0,0,-100.0);
+    glRotatef(90.0,1.0,0.0,0.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 200.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 100.0, 200.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 100.0,  0.0 );
+
+    glEnd();
+    glPopMatrix();
+
 
     // Flush the buffer
     glFlush();
