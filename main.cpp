@@ -121,11 +121,33 @@ void keyboardUp( unsigned char key, int x, int y ) {
     }
 }
 
+void mouseButton(int button, int state, int x, int y) {
+    switch (button) {
+        case GLUT_LEFT_BUTTON:
+            if (state == GLUT_DOWN) {
+                mousePrevX = x;
+                mousePrevY = WINDOW_MAX_Y-y;
+                cout << "reset x,y\n";
+            }
+            break;
+    }
+}
+
 void mouseMove(int x, int y) {
         y=WINDOW_MAX_Y-y;
 
+        // cout << "mousePrevX = " << mousePrevX << endl;
+        // cout << "mousePrevY = " << mousePrevY << endl;
+
         angleX += (x-mousePrevX) / 6.0;
         angleZ += (y-mousePrevY) / 6.0;
+
+        cout << "x = " << x << endl;
+        cout << "y = " << y << endl;
+        cout << "xprev = " << mousePrevX << endl;
+        cout << "yprev = " << mousePrevY << endl;
+        cout << "x-mousePrevX = " << x-mousePrevX << endl;
+        cout << "y-mousePrevY = " << y-mousePrevY << endl;
 
         // cout << "angleZ = " << angleZ << endl << "angleX = " << angleX << endl;
 
@@ -145,9 +167,9 @@ void mouseMove(int x, int y) {
         if(angleZ<-90)angleZ=-90;
 
         // update x and z vectors
-        vectorX = cos((angleX+90)*M_PI/180.0);
-        vectorY = -sin(angleX*M_PI/180.0);
-        vectorZ = tan(angleZ*M_PI/180.0);
+        vectorX = -cos(angleX*M_PI/180.0);
+        vectorZ = -sin(angleX*M_PI/180.0);
+        vectorY = tan(angleZ*M_PI/180.0);
 
         // glutWarpPointer(midX, WINDOW_MAX_Y-midY);
 
@@ -200,6 +222,7 @@ int main(int argc, char** argv)
     glutKeyboardUpFunc(keyboardUp);
     glutDisplayFunc(display); 
     glutIdleFunc(display); 
+    glutMouseFunc(mouseButton);
     glutMotionFunc(mouseMove);
     glClearColor(0.1,0.1,0.1,0.0);
     glutMainLoop();
